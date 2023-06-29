@@ -1,0 +1,21 @@
+import sqlite3
+
+# Подключение к базе данных SQLite
+conn = sqlite3.connect('database.db')
+
+# Создание таблицы
+conn.execute('''CREATE TABLE IF NOT EXISTS employees
+                (id INT PRIMARY KEY NOT NULL,
+                name TEXT NOT NULL,
+                age INT NOT NULL);''')
+
+# Вставка данных
+conn.execute("INSERT INTO employees (id, name, age) VALUES (1, 'John', 30)")
+
+# Выполнение запроса
+cursor = conn.execute("SELECT id, name, age from employees")
+for row in cursor:
+    print(f"ID: {row[0]}, Name: {row[1]}, Age: {row[2]}")
+
+# Закрытие соединения
+conn.close()
